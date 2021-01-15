@@ -32,25 +32,31 @@ module.exports = function (app) {
 
       }else if(!Object.keys(rowToNumber).includes(req.body.coordinate[0].toUpperCase())) {
         res.json({
-          error: 'invalid value'
+          error: 'Invalid coordinate'
         });
         return console.log('invalid number');
       }else if(+req.body.coordinate.slice(1) < 1 || +req.body.coordinate.slice(1) > 9) {
         res.json({
-          error: 'invalid value'
+          error: 'Invalid coordinate'
         });
         return console.log('invalid number');
       }
       let puzzleString = req.body.puzzle 
-      let row = rowToNumber[req.body.coordinate[0].toUpperCase()]
-      let column = req.body.coordinate[1] - 1
-      let value = req.body.value
       if(!Solver.validate(puzzleString)) {
+        res.json({
+          error: 'Invalid characters in puzzle'
+        })
+        return console.log('Invalid characters in puzzle')
+      }
+      if(puzzleString.length !== 81) {
         res.json({
           error: 'Expected puzzle to be 81 characters long'
         })
         return console.log('Expected puzzle to be 81 characters long')
       }
+      let row = rowToNumber[req.body.coordinate[0].toUpperCase()]
+      let column = req.body.coordinate[1] - 1
+      let value = req.body.value
       let conflict = []
       let colPlacement = !Solver.checkColPlacement(puzzleString, row, column, value) ? conflict.push('column') : true
       let regionPlacment = !Solver.checkRegionPlacement(puzzleString, row, column, value) ? conflict.push('region') : true

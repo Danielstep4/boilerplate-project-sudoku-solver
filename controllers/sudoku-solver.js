@@ -1,8 +1,11 @@
 class SudokuSolver {
 
   validate(puzzleString) {
-    if(puzzleString.length !== 81) return false
-    else return true
+    // TODO!
+    puzzleString = puzzleString.split('')
+    puzzleString.forEach(item => {
+      
+    })
   } 
 
   checkRowPlacement(puzzleString, row, column, value) {
@@ -19,7 +22,7 @@ class SudokuSolver {
       colArr.push(puzzleString[i])
     }
     if(colArr[row] !== '.') return false
-    if(colArr.includes('value')) return false
+    if(colArr.includes(value)) return false
     else return true
   }
 
@@ -44,7 +47,8 @@ class SudokuSolver {
   }
 
   solve(puzzleString) {
-    console.log('Solved')
+    // TODO!
+    console.log('it works')
   }
 }
 
