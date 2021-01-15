@@ -24,12 +24,16 @@ module.exports = function (app) {
         });
         return console.log('Required field(s) missing');
       }
-      if(req.body.value < 1 || req.body.value > 9) {
-        res.json({
-          error: 'invalid value'
-        });
-        return console.log('invalid number');
-
+      if(!/[1-9]/.test(req.body.value)) {
+        let checkValue = parseInt(req.body.value)
+        
+        if(checkValue < 1 || checkValue > 9 || !checkValue) {
+          res.json({
+            error: 'invalid value'
+          });
+          return console.log('invalid number');
+  
+        }
       }else if(!Object.keys(rowToNumber).includes(req.body.coordinate[0].toUpperCase())) {
         res.json({
           error: 'Invalid coordinate'
@@ -76,6 +80,12 @@ module.exports = function (app) {
     
   app.route('/api/solve')
     .post((req, res) => {
+      if(!req.body.puzzle) {
+        res.json({
+          error: 'Required field missing'
+        });
+        return console.log('Required field missing');
+      }
       let puzzleString = req.body.puzzle
       if(!Solver.validate(puzzleString)) {
         res.json({
