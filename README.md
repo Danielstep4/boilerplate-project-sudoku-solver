@@ -4,7 +4,7 @@
 
 ##### 1. You can POST /api/solve with form data containing puzzle which will be a string containing a combination of numbers (1-9) and periods . to represent empty spaces. The returned object will contain a solution property with the solved puzzle.
 
-##### 2. If the object submitted to /api/solve is missing puzzle, the returned value will be { error: 'Required field missing' }
+##### ~~2. If the object submitted to /api/solve is missing puzzle, the returned value will be { error: 'Required field missing' }~~
 
 ##### ~~3. If the puzzle submitted to /api/solve contains values which are not numbers or periods, the returned value will be { error: 'Invalid characters in puzzle' }~~
 
@@ -24,7 +24,7 @@
 
 ##### ~~11. If the coordinate submitted to api/check does not point to an existing grid cell, the returned value will be { error: 'Invalid coordinate'}~~
 
-##### 12. If the value submitted to /api/check is not a number between 1 and 9, the returned values will be { error: 'Invalid value' }
+##### ~~12. If the value submitted to /api/check is not a number between 1 and 9, the returned values will be { error: 'Invalid value' }~~
 
 ### Tests
 
