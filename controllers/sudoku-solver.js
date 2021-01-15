@@ -1,11 +1,11 @@
 class SudokuSolver {
 
   validate(puzzleString) {
-    // TODO!
     puzzleString = puzzleString.split('')
-    puzzleString.forEach(item => {
-      
-    })
+    for(let item of puzzleString) {
+      if(item !== '.' && !/[1-9]/.test(item)) return false
+    }
+    return true
   } 
 
   checkRowPlacement(puzzleString, row, column, value) {

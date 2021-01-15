@@ -48,6 +48,7 @@ module.exports = function (app) {
         })
         return console.log('Invalid characters in puzzle')
       }
+      
       if(puzzleString.length !== 81) {
         res.json({
           error: 'Expected puzzle to be 81 characters long'
@@ -77,6 +78,12 @@ module.exports = function (app) {
     .post((req, res) => {
       let puzzleString = req.body.puzzle
       if(!Solver.validate(puzzleString)) {
+        res.json({
+          error: 'Invalid characters in puzzle'
+        })
+        return console.log('Invalid characters in puzzle')
+      }
+      if(puzzleString.length !== 81) {
         res.json({
           error: 'Expected puzzle to be 81 characters long'
         })
