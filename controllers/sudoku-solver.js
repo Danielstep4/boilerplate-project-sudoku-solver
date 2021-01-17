@@ -48,6 +48,7 @@ class SudokuSolver {
 
   solve(puzzleString) {
     while(puzzleString.includes('.')) {
+      let startingPuzzle = puzzleString
       for(let i = 0; i < 81; i++) {
         let item = puzzleString[i]
         if(item === '.') {
@@ -66,6 +67,7 @@ class SudokuSolver {
           puzzleString = puzzleString.join('')
         }
       }
+      if(startingPuzzle === puzzleString) break;
     }
     return puzzleString
   }
