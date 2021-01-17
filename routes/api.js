@@ -99,6 +99,15 @@ module.exports = function (app) {
         })
         return console.log('Expected puzzle to be 81 characters long')
       }
-      Solver.solve(puzzleString)
+      let solvedPuzzle = Solver.solve(puzzleString) ? Solver.solve(puzzleString) : false
+      if(!solvedPuzzle) {
+        res.json({
+          error: 'Puzzle cannot be solved'
+        })
+        return console.log('Puzzle cannot be solved')
+      }
+      res.json({
+        solution: solvedPuzzle
+      })
     });
 };

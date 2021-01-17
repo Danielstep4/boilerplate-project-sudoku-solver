@@ -47,8 +47,27 @@ class SudokuSolver {
   }
 
   solve(puzzleString) {
-    // TODO!
-    console.log('it works')
+    while(puzzleString.includes('.')) {
+      for(let i = 0; i < 81; i++) {
+        let item = puzzleString[i]
+        if(item === '.') {
+          let row = Math.floor(i / 9)
+          let column = i % 9
+          let optionalValues = []
+          for(let k = 1; k < 10; k++) {
+            let value = k.toString()
+            if(this.checkRowPlacement(puzzleString, row, column, value) && this.checkRegionPlacement(puzzleString, row, column, value) && this.checkColPlacement(puzzleString, row, column, value)) {
+              optionalValues.push(value)
+            }
+          }
+          if(optionalValues.length === 0) return false
+          puzzleString = puzzleString.split('')
+          puzzleString[i] = optionalValues.length === 1 ? optionalValues[0] : '.'
+          puzzleString = puzzleString.join('')
+        }
+      }
+    }
+    return puzzleString
   }
 }
 
