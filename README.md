@@ -2,7 +2,7 @@
 
 ### Routes
 
-##### 1. You can POST /api/solve with form data containing puzzle which will be a string containing a combination of numbers (1-9) and periods . to represent empty spaces. The returned object will contain a solution property with the solved puzzle.
+##### ~~1. You can POST /api/solve with form data containing puzzle which will be a string containing a combination of numbers (1-9) and periods . to represent empty spaces. The returned object will contain a solution property with the solved puzzle.~~
 
 ##### ~~2. If the object submitted to /api/solve is missing puzzle, the returned value will be { error: 'Required field missing' }~~
 
@@ -10,7 +10,7 @@
 
 ##### ~~4. If the puzzle submitted to /api/solve is greater or less than 81 characters, the returned value will be { error: 'Expected puzzle to be 81 characters long' }~~
 
-##### 5. If the puzzle submitted to /api/solve is invalid or cannot be solved, the returned value will be { error: 'Puzzle cannot be solved' }
+##### ~~5. If the puzzle submitted to /api/solve is invalid or cannot be solved, the returned value will be { error: 'Puzzle cannot be solved' }~~
 
 ##### ~~6. You can POST to /api/check an object containing puzzle, coordinate, and value where the coordinate is the letter A-I indicating the row, followed by a number 1-9 indicating the column, and value is a number from 1-9.~~
 
