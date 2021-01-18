@@ -42,26 +42,32 @@ module.exports = function (app) {
         return console.log('invalid number');
       }
       let puzzleString = req.body.puzzle 
-      if(!Solver.validate(puzzleString)) {
+      if(Solver.validate(puzzleString) === false) {
         res.json({
           error: 'Invalid characters in puzzle'
         })
         return console.log('Invalid characters in puzzle')
-      }
-      
+      }   
       if(puzzleString.length !== 81) {
         res.json({
           error: 'Expected puzzle to be 81 characters long'
         })
         return console.log('Expected puzzle to be 81 characters long')
       }
+      if(Solver.validate(puzzleString) === 'Puzzle can\'t be solved!') {
+        res.json({
+          error: 'Puzzle cannot be solved'
+        })
+        return console.log('Puzzle cannot be solved')
+      }
+      let puzzle = Solver.validate(puzzleString)
       let row = rowToNumber[req.body.coordinate[0].toUpperCase()]
       let column = req.body.coordinate[1] - 1
       let value = req.body.value
       let conflict = []
-      let colPlacement = !Solver.checkColPlacement(puzzleString, row, column, value) ? conflict.push('column') : true
-      let regionPlacment = !Solver.checkRegionPlacement(puzzleString, row, column, value) ? conflict.push('region') : true
-      let rowPlacement = !Solver.checkRowPlacement(puzzleString, row, column, value) ? conflict.push('row') : true
+      let colPlacement = !Solver.checkColPlacement(puzzle, row, column, value) ? conflict.push('column') : true
+      let regionPlacment = !Solver.checkRegionPlacement(puzzle, row, column, value) ? conflict.push('region') : true
+      let rowPlacement = !Solver.checkRowPlacement(puzzle, row, column, value) ? conflict.push('row') : true
       if(conflict.length > 0) {
         res.json({
           valid: false,
@@ -83,7 +89,7 @@ module.exports = function (app) {
         return console.log('Required field missing');
       }
       let puzzleString = req.body.puzzle
-      if(!Solver.validate(puzzleString)) {
+      if(Solver.validate(puzzleString) === false) {
         res.json({
           error: 'Invalid characters in puzzle'
         })
@@ -95,13 +101,15 @@ module.exports = function (app) {
         })
         return console.log('Expected puzzle to be 81 characters long')
       }
-      let solvedPuzzle = Solver.solve(puzzleString) ? Solver.solve(puzzleString) : false
-      if(!solvedPuzzle) {
+      if(Solver.validate(puzzleString) === 'Puzzle can\'t be solved!') {
         res.json({
           error: 'Puzzle cannot be solved'
         })
         return console.log('Puzzle cannot be solved')
       }
+      let puzzle = Solver.validate(puzzleString)
+      Solver.solve(puzzle)
+      let solvedPuzzle = Solver.solution.solution
       res.json({
         solution: solvedPuzzle
       })
